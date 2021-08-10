@@ -1,0 +1,36 @@
+- name: install docker-cleanup script
+  template:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item }}"
+  with_items:
+    - "docker-cleanup.sh"
+  notify: docker-cleanup-restart
+
+- name: make docker-cleanup executable
+  file:
+    path: "/usr/local/bin/{{ item }}"
+    owner: root
+    group: root
+    mode: "0755"
+  with_items:
+    - "docker-cleanup.sh"
+  notify: docker-cleanup-restart
+
+- name: install docker-cleanup systemd unit file
+  template:
+    src: "{{ item }}"
+    dest: "/etc/systemd/system/{{ item }}"
+  with_items:
+    - "docker-cleanup.timer"
+    - "docker-cleanup.service"
+  notify: docker-cleanup-restart
+
+- name: reload configs
+  systemd:
+    daemon_reload: yes
+  notify: docker-cleanup-restart
+
+# - name: Enable docker-cleanup
+#   systemd:
+#     name: docker-cleanup
+#     state: started

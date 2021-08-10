@@ -1,0 +1,1 @@
+docker_cleanup_schedule: "*-*-* 01:00:00"

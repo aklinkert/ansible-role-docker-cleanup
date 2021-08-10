@@ -1,0 +1,6 @@
+- name: docker-cleanup-restart
+  systemd:
+    name: docker-cleanup.timer
+    enabled: yes
+    state: restarted
+    masked: no

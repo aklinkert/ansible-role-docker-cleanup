@@ -1,0 +1,12 @@
+# {{ ansible_managed }}
+
+[Unit]
+Description=Cleanup unused docker resources
+
+[Timer]
+OnCalendar={{ docker_cleanup_schedule }}
+Unit=docker-cleanup.service
+Persistent=true
+
+[Install]
+WantedBy=timers.target
