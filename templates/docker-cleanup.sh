@@ -1,8 +1,7 @@
+#!/usr/bin/env bash
 # {{ ansible_managed }}
 
-#!/usr/bin/env bash
-
-set -e
+set -euo pipefail
 
 docker system prune -af
 
