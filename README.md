@@ -6,7 +6,7 @@ Ansible role that installs a systemd timer which runs `docker system prune -af` 
 
 ## Requirements
 
-- ansible-core 2.16 or newer
+- ansible-core 2.16 or newer (minimum supported version)
 - A systemd based Debian or Ubuntu host with Docker installed
 - Privilege escalation (`become: true`), the role writes to `/usr/local/bin` and `/etc/systemd/system`
 
@@ -15,6 +15,10 @@ Ansible role that installs a systemd timer which runs `docker system prune -af` 
 | Variable | Default | Description |
 | --- | --- | --- |
 | `docker_cleanup_schedule` | `*-*-* 01:00:00` | systemd `OnCalendar` expression for the cleanup run |
+
+## Handler
+
+The role defines the handler `Restart docker-cleanup timer` (reloads systemd, enables and restarts `docker-cleanup.timer`). Playbooks can notify it by that name; the old name `docker-cleanup-restart` is still listened to.
 
 ## Usage
 

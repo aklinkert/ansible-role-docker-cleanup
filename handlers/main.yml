@@ -1,6 +1,8 @@
 - name: Restart docker-cleanup timer
+  listen: docker-cleanup-restart
   ansible.builtin.systemd:
     name: docker-cleanup.timer
+    daemon_reload: true
     enabled: true
     state: restarted
     masked: false
