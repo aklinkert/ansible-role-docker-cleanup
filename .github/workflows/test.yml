@@ -13,6 +13,7 @@ jobs:
         with:
           persist-credentials: false
       - run: tests/check-shebang.sh
+      - run: tests/check-symlinks.sh
   ansible:
     runs-on: ubuntu-24.04
     timeout-minutes: 15
